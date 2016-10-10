@@ -1,1 +1,1 @@
-# W-zek-wid-owy-DKCK16
+# Forklift project for Human-Computer Comunication class
