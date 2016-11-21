@@ -13,3 +13,5 @@
 * Znajdź miejsce na paczkę X z działu przyjęć
 * Posortuj paczki typami (na regale X)
 * Uporządkuj paczki typami według regałów.
+* Odłóż paczkę X na regał z żywnością.
+* Znajdź miejsce na paczkę X zgodnie z jej typem.
