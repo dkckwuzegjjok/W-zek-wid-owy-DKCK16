@@ -1,6 +1,4 @@
 * Pobierz paczkę z regału 4
-* Załaduj na tira jadącego do Berlina
-* Załaduj pozostałe paczki z regału 4 do tira
 * Posortuj paczki według daty przybycia na regale 1
 * Przewieź paczkę z regału numer 3 poziom 2 na regał numer 4 poziom 1.
 * Przenieś paczkę X na regał Y
