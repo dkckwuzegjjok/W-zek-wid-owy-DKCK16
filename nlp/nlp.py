@@ -1,6 +1,6 @@
 import sys
-import tokenrules
-import ply.lex as lex
+import forkliftlexer
+import forkliftparser
 
 def trans(word):
     intab = 'ąęółśżźćń'
@@ -8,10 +8,13 @@ def trans(word):
     transtab = str.maketrans(intab, outtab)
     return word.translate(transtab)
 
-lexer = lex.lex(module=tokenrules)
+
 
 cmd = trans(sys.argv[1].lower())
 
-lexer.input(cmd)
-for tok in lexer:
+forkliftlexer.flexer.input(cmd)
+
+for tok in forkliftlexer.flexer:
     print(tok)
+
+print(forkliftparser.fparser.parse(cmd))
