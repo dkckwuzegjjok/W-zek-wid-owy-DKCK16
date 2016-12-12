@@ -10,8 +10,12 @@ categorydict = {'zywnosc' : 1}
 tokens = forkliftlexer.tokens
 
 def p_moveitemfromto1(p):
-    '''moveitemfromto : MOVEITEM fulltype ITEM id FROM rack rack side'''
-    p[0] = '1' + p[2] + p[6] + p[7] + p[8] + p[4]
+    '''moveitemfromto : MOVEITEM fulltype ITEM id FROM rack TO rack side'''
+    p[0] = '1' + p[2] + p[6] + p[8] + p[9] + p[4]
+
+def p_moveitemfromto02(p):
+    '''moveitemfromto : MOVEITEM fulltype ITEM id FROM rack side TO rack'''
+    p[0] = '1' + p[2] + p[6] + p[9] + p[7] + p[4]
 
 def p_moveitemfromto2(p):
     '''moveitemfromto : MOVEITEM fulltype ITEM id FROM rack side rack'''
@@ -118,12 +122,12 @@ def p_fulltype(p):
                 | matcat color
                 | material color category
                 | category color material'''
-    if len(p) > 3:
+    if len(p) == 4:
         if 'm' in p[1]:
             p[0] = p[2].replace('c', '') + p[1].replace('m', '') + p[3]
         else:
             p[0] = p[2].replace('c', '') + p[3].replace('m', '') + p[1]
-    if len(p) < 4:
+    elif len(p) == 3:
         if 'c' in p[1]:
             p[0] = p[1].replace('c', '') + p[2].replace('m', '')
         else:
@@ -182,22 +186,23 @@ def p_lvl(p):
     '''lvl : LVL NUM
            | NUM LVL
            | empty'''
-    if len(p) > 2:
+    if len(p) == 3:
         if type(p[1]) is str:
             p[0] = str(p[2])
         elif type(p[2]) is str:
             p[0] = str(p[1])
-    else:
+    elif len(p) == 2:
         p[0] = p[1]
 
 def p_side(p):
-    '''side : SIDE
+    '''side : TO SIDE
             | empty'''
-    p[0] = p[1]
-    p[0] = p[1]
-    for i in sidedict:
-        if i in p[1]:
-            p[0] = str(sidedict[i])
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 3:
+        for i in sidedict:
+            if i in p[2]:
+                p[0] = str(sidedict[i])
 
 def p_id(p):
     '''id : ID

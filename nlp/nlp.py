@@ -8,8 +8,6 @@ def trans(word):
     transtab = str.maketrans(intab, outtab)
     return word.translate(transtab)
 
-
-
 cmd = trans(sys.argv[1].lower())
 
 forkliftlexer.flexer.input(cmd)
