@@ -3,7 +3,7 @@ import forkliftlexer
 
 colorsdict = {'czerwon' : 1, 'niebiesk' : 2, 'zolt' : 3, 'zielon' : 4,
               'czarn' : 5, 'bial' : 6}
-materialdict = {'drewn' : 1, 'metal' : 2, 'zywnosc' : 3}
+materialdict = {'drewn' : 1, 'metal' : 2}
 sidedict = {'lew' : 1, 'srod' : 2, 'praw' : 3}
 categorydict = {'zywnosc' : 1}
 
@@ -152,24 +152,29 @@ def p_go4(p):
 #         p[0] = p[2] + p[1]
 
 
-def p_fulltype(p):
+def p_fulltype1(p):
     '''fulltype : color material category'''
     p[0] = p[1] + p[2] + p[3]
 
-def p_fulltype(p):
+def p_fulltype2(p):
     '''fulltype : color category material'''
+    p[0] = p[1] + p[3] + p[2]
 
-def p_fulltype(p):
+def p_fulltype3(p):
     '''fulltype : material category color'''
+    p[0] = p[3] + p[1] + p[2]
 
-def p_fulltype(p):
+def p_fulltype4(p):
     '''fulltype : material color category'''
+    p[0] = p[2] + p[1] + p[3]
 
-def p_fulltype(p):
+def p_fulltype5(p):
     '''fulltype : category material color'''
+    p[0] = p[3] + p[2] + p[1]
 
-def p_fulltype(p):
+def p_fulltype6(p):
     '''fulltype : category color material'''
+    p[0] = p[2] + p[3] + p[1]
 
 def p_material(p):
     '''material : MATERIAL
@@ -177,7 +182,7 @@ def p_material(p):
     p[0] = p[1]
     for i in materialdict:
         if i in p[1]:
-            p[0] = str(materialdict[i]) + 'm'
+            p[0] = str(materialdict[i])
 
 def p_color(p):
     '''color : COLOR
@@ -185,7 +190,7 @@ def p_color(p):
     p[0] = p[1]        
     for i in colorsdict:
         if i in p[1]:
-            p[0] = str(colorsdict[i]) + 'c'
+            p[0] = str(colorsdict[i])
 
 def p_category(p):
     '''category : CATEGORY
