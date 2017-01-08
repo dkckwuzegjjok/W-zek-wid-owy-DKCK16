@@ -115,10 +115,12 @@ def p_go2(p):
 
 def p_go3(p):
     '''main : GO TO ITEM fulltype id'''
-    p[0] = '2' + str(p[4]) + '00' + '00' + '0' + str(p[5])
+    p[0] = '2' + p[4] + '00' + '00' + '0' + p[5]
 
 def p_go4(p):
     '''main : GO TO ITEM id fulltype'''
+
+# def p_sort(p):
 
 # def p_pick(p):
 
