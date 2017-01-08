@@ -15,16 +15,16 @@ t_SHELF = (r'regal(u|e|y|ach)?')
 t_LVL = (r'poziom(u|ie|ach)?|pol(ce|k(a|e|i|ach))')
 t_SIDE = (r'praw(o|a|y|ej)|lew(o|a|y|ej)|srod(ek|ku)|posrodku')
 t_FROM = (r'\bz\b')
-t_TO = (r'\bna\b')
+t_TO = (r'\bna\b|\bdo\b')
 t_ITEM = (r'pacz(ce|ek|k(e|a|i|ach|om))|pakun(ek|ki)|skrzyn(i|ce|ie|iach|kach)|'
           r'karton(u|y|ow(i)?|em|ie|a(mi|ch))|pale(t(e|a(mi)?|y)|cie)')
-t_COLOR = (r'czerwon(y|a|e|ym|ej|ego|ych)|niebiesk(i|a|ie(j)?|ich|im(i)?|iego)|'
+t_COLOR = (r'czerwon(ego|ych|ym|ej|y|a|e)|niebiesk(i|a|ie(j)?|ich|im(i)?|iego)|'
            r'zolt(y|a|e|ym|ej|ego|ych)|zielon(y|a|e|ym|ej|ego|ych)|'
            r'czarn(y|a|e|ym|ej|ego|ych)|bial(y|a|e|ym|ej|ego|ych)')
 # t_NUM = (r'\d')
 
 def t_zignoruj(t):
-    (r'\bjej\b|\bo\b|\bi\b|\bnumer\b|\bstron(a|e|ie)\b|\bid\b|\bto\b|\bdo\b|'
+    (r'\bjej\b|\bo\b|\bi\b|\bnumer\b|\bstron(a|e|ie)\b|\bid\b|\bto\b|'
      r'\bpo\b|\bktor(a|ej)\b|\bjest\b|\bkolor(u|ze)\b|\s|\t|,|\.|"|\'|!|\?')
     pass
 
