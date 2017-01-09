@@ -115,44 +115,93 @@ def p_go2(p):
 
 def p_go3(p):
     '''main : GO TO ITEM fulltype id'''
-    p[0] = '2' + p[4] + '00' + '00' + '0' + p[5]
+    p[0] = '3' + p[4] + '00' + '00' + '0' + p[5]
 
 def p_go4(p):
     '''main : GO TO ITEM id fulltype'''
+    p[0] = '3' + p[5] + '00' + '00' + '0' + p[4]
+
+def p_go5(p):
+    '''main : GO TO fulltype ITEM id'''
+    p[0] = '3' + p[3] + '00' + '00' + '0' + p[5]
+
+def p_find1(p):
+    '''main : FIND rack side'''
+    p[0] = '2' + '000' + '00' + p[2] + p[3] + '000'
+
+def p_find2(p):
+    '''main : FIND side rack'''
+    p[0] = '2' + '000' + '00' + p[3] + p[2] + '000'
+
+def p_find3(p):
+    '''main : FIND ITEM fulltype id'''
+    p[0] = '3' + p[3] + '00' + '00' + '0' + p[4]
+
+def p_find4(p):
+    '''main : FIND ITEM id fulltype'''
+    p[0] = '3' + p[4] + '00' + '00' + '0' + p[3]
+
+def p_find5 (p):
+    '''main : FIND fulltype ITEM id'''
+    p[0] = '3' + p[2] + '00' + '00' + '0' + p[4]
+
+def p_pick1(p):
+    '''main : PICK fulltype ITEM FROM rack id'''
+    p[0] = '4' + p[2] + p[5] + '00' + '0' + p[6]
+
+def p_pick2(p):
+    '''main : PICK fulltype ITEM id FROM rack'''
+    p[0] = '4' + p[2] + p[6] + '00' + '0' + p[4]
+
+def p_pick3(p):
+    '''main : PICK ITEM fulltype id FROM rack'''
+    p[0] = '4' + p[3] + p[6] + '00' + '0' + p[4]
+
+def p_pick4(p):
+    '''main : PICK ITEM id fulltype FROM rack'''
+    p[0] = '4' + p[4] + p[6] + '00' + '0' + p[3]
+
+def p_pick5(p):
+    '''main : FROM rack PICK fulltype ITEM id'''
+    p[0] = '4' + p[4] + p[2] + '00' + '0' + p[6]
+
+def p_pick6(p):
+    '''main : FROM rack PICK ITEM fulltype id'''
+    p[0] = '4' + p[5] + p[2] + '00' + '0' + p[6]
+
+def p_pick7(p):
+    '''main : FROM rack PICK ITEM id fulltype'''
+    p[0] = '4' + p[6] + p[2] + '00' + '0' + p[5]
+
+def p_pick8(p):
+    '''main : PICK fulltype ITEM id'''
+    p[0] = '4' + p[2] + '00' + '00' + '0' + p[4]
+
+def p_pick9(p):
+    '''main : PICK ITEM fulltype id'''
+    p[0] = '4' + p[3] + '00' + '00' + '0' + p[4]
+
+def p_pick10(p):
+    '''main : PICK ITEM id fulltype'''
+    p[0] = '4' + p[4] + '00' + '00' + '0' + p[3]
+
+def p_lay1(p):
+    '''main : LAY ITEM TO rack side'''
+    p[0] = '5' + '000' + '00' + p[4] + p[5] + '000'
+
+def p_lay2(p):
+    '''main : LAY ITEM TO side rack'''
+    p[0] = '5' + '000' + '00' + p[5] + p[4] + '000'
+
+def p_lay3(p):
+    '''main : ITEM LAY TO rack side'''
+    p[0] = '5' + '000' + '00' + p[4] + p[5] + '000'
+
+def p_lay4(p):
+    '''main : ITEM LAY TO side rack'''
+    p[0] = '5' + '000' + '00' + p[5] + p[4] + '000'
 
 # def p_sort(p):
-
-# def p_pick(p):
-
-# def p_lay(p):
-
-# def p_find(p):
-# rozdzielić na osobne fulltype
-# def p_fulltype(p):
-#     '''fulltype : color matcat
-#                 | matcat color
-#                 | material color category
-#                 | category color material'''
-#     if len(p) == 4:
-#         if 'm' in p[1]:
-#             p[0] = p[2].replace('c', '') + p[1].replace('m', '') + p[3]
-#         else:
-#             p[0] = p[2].replace('c', '') + p[3].replace('m', '') + p[1]
-#     elif len(p) == 3:
-#         if 'c' in p[1]:
-#             p[0] = p[1].replace('c', '') + p[2].replace('m', '')
-#         else:
-#             p[0] = p[2].replace('c', '') + p[1].replace('m', '')
-
-# def p_matcat(p):
-#     '''matcat : material category
-#               | category material'''
-#     p[0] = p[2] + p[1]
-#     if 'm' in p[1]:
-#         p[0] = p[1] + p[2]
-#     elif 'm' in p[2]:
-#         p[0] = p[2] + p[1]
-
 
 def p_fulltype1(p):
     '''fulltype : color material category'''

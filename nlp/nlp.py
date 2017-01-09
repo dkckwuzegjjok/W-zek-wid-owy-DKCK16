@@ -14,6 +14,8 @@ forkliftlexer.flexer.input(cmd)
 
 for tok in forkliftlexer.flexer:
     print(tok)
-file = open('out.txt', 'w')
-file.write(forkliftparser.fparser.parse(cmd))
-file.close()
+# file = open('out.txt', 'w')
+# file.write(forkliftparser.fparser.parse(cmd))
+# file.close()
+
+print(forkliftparser.fparser.parse(cmd))

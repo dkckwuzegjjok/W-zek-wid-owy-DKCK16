@@ -4,7 +4,7 @@ tokens = ('MOVEITEM', 'GO', 'LAY', 'SORT', 'PICK', 'FIND', 'MATERIAL', 'CATEGORY
           'SHELF', 'LVL', 'SIDE', 'FROM', 'TO', 'ITEM', 'COLOR', 'ID', 'NUM')
 
 t_MOVEITEM = (r'za(wiez|nies)|prze(nies|wiez)')
-t_GO = (r'(do|po(d)?)?jedz')
+t_GO = (r'(do|po(d)?)?jedz|idz|pojdz')
 t_LAY = (r'(po|od)loz')
 t_SORT = (r'u?porzadkuj|(po)?sortuj|po(u|prze)kladaj')
 t_PICK = (r'podnies|(z|po)?bierz')
@@ -24,7 +24,7 @@ t_COLOR = (r'czerwon(ego|ych|ym|ej|y|a|e)|niebiesk(i|a|ie(j)?|ich|im(i)?|iego)|'
 # t_NUM = (r'\d')
 
 def t_zignoruj(t):
-    (r'\bjej\b|\bo\b|\bi\b|\bnumer\b|\bstron(a|e|ie)\b|\bid\b|\bto\b|'
+    (r'\bjej\b|\bo\b|\bi\b|\bma\b|\bnumer\b|\bstron(a|e|ie)\b|\bid\b|\bto\b|'
      r'\bpo\b|\bktor(a|ej)\b|\bjest\b|\bkolor(u|ze)\b|\s|\t|,|\.|"|\'|!|\?')
     pass
 
