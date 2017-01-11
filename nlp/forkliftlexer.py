@@ -5,7 +5,7 @@ tokens = ('MOVEITEM', 'GO', 'LAY', 'SORT', 'PICK', 'FIND', 'MATERIAL', 'CATEGORY
 
 t_MOVEITEM = (r'za(wiez|nies)|prze(nies|wiez)')
 t_GO = (r'(do|po(d)?)?jedz|idz|pojdz')
-t_LAY = (r'(po|od)loz')
+t_LAY = (r'(po|od)loz|(po|do)staw')
 t_SORT = (r'u?porzadkuj|(po)?sortuj|po(u|prze)kladaj')
 t_PICK = (r'podnies|(z|po)?bierz')
 t_FIND = (r'(od|z)najdz|(po|od)?szukaj')
