@@ -158,7 +158,7 @@ def p_moveitemfromto26(p):
 #     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
 
 def p_moveitemto1(p):
-    '''main : moveitem fulltype ITEM id TO rack side'''
+    '''main : MOVEITEM fulltype ITEM id TO rack side'''
     p[0] = '2' + p[2] + '00' + p[6] + p[7] + p[4]
 
 def p_moveitemto2(p):
@@ -351,7 +351,7 @@ def p_category(p):
         if i in p[1]:
             p[0] = str(categorydict[i])
 
-def p_moveitem(p):
+def p_moveitem1(p):
     '''moveitem : MOVEITEM
                 | LAY'''
     p[0] = p[1]
