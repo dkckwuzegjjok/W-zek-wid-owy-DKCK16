@@ -4,7 +4,7 @@ tokens = ('MOVEITEM', 'GO', 'LAY', 'SORT', 'PICK', 'FIND', 'MATERIAL', 'CATEGORY
           'SHELF', 'LVL', 'SIDE', 'FROM', 'TO', 'ITEM', 'COLOR', 'ID', 'NUM')
 
 t_MOVEITEM = (r'za(wiez|nies)|prze(nies|wiez)')
-t_GO = (r'(do|po(d)?)?jedz|idz|pojdz')
+t_GO = (r'(za|do|po(d)?)?jedz|idz|pojdz')
 t_LAY = (r'(po|od)loz|(po|do)staw')
 t_SORT = (r'u?porzadkuj|(po)?sortuj|po(u|prze)kladaj')
 t_PICK = (r'podnies|(z|po)?bierz|zdejmij')
@@ -14,7 +14,7 @@ t_CATEGORY = (r'zywnosc(ia|iowa|iowej)?')
 t_SHELF = (r'regal(u|e|y|ach)?')
 t_LVL = (r'poziom(u|ie|ach)?|pol(ce|k(a|e|i|ach))')
 t_SIDE = (r'praw(o|a|y|ej)|lew(o|a|y|ej)|srod(ek|ku)|posrodku')
-t_FROM = (r'\bz\b')
+t_FROM = (r'\bz\b|\bod\b')
 t_TO = (r'\bna\b|\bdo\b')
 t_ITEM = (r'pacz(ce|ek|k(e|a|i|ach|om))|pakun(ek|ki)|skrzyn(i|ce|ie|iach|kach)|'
           r'karton(u|y|ow(i)?|em|ie|a(mi|ch))|pale(t(e|a(mi)?|y)|cie)')
@@ -24,7 +24,7 @@ t_COLOR = (r'czerwon(ego|ych|ym|ej|y|a|e)|niebiesk(i|a|ie(j)?|ich|im(i)?|iego)|'
 # t_NUM = (r'\d')
 
 def t_zignoruj(t):
-    (r'\bjej\b|\bo\b|\bi\b|\bma\b|\bnr\b|\bnumer\b|\bstron(a|e|ie)\b|\bid\b|\bto\b|'
+    (r'\bjej\b|\bo\b|\bi\b|\bma\b|\bnr\b|\bnumer(u|ze)?\b|\bstron(a|e|ie)\b|\bid\b|\bto\b|'
      r'\bpo\b|\bktor(a|ej)\b|\bjest\b|\bkolor(u|ze)\b|\s|\t|,|\.|"|\'|!|\?')
     pass
 
