@@ -4,244 +4,94 @@ import forkliftlexer
 colorsdict = {'czerwon' : 1, 'niebiesk' : 2, 'zolt' : 3, 'zielon' : 4,
               'czarn' : 5, 'bial' : 6}
 materialdict = {'drewn' : 1, 'metal' : 2}
-sidedict = {'lew' : 1, 'srod' : 2, 'praw' : 3}
+sidedict = {'gor' : 1, 'srod' : 2, 'dol' : 3}
 categorydict = {'zywnosc' : 1}
+numberdict1 = {'jeden' : 1, 'dwa' : 2, 'trzy' : 3, 'cztery' : 4, 'piec' : 5, 'szesc' : 6}
+numberdict2 = {'pierwsz' : 1, 'drug' : 2, 'trzeci' : 3, 'czwart' : 4, 'piat' : 5, 'szost' : 6}
 
 tokens = forkliftlexer.tokens
 
 def p_moveitemfromto1(p):
-    '''main : movelay fulltype ITEM id FROM rack TO rack side'''
-    p[0] = '1' + p[2] + p[6] + p[8] + p[9] + p[4]
+    '''main : movelay fulltype ITEM id FROM rack TO rack'''
+    p[0] = '1' + p[2] + p[6] + p[8] + '0' + p[4]
 
 def p_moveitemfromto2(p):
-    '''main : movelay fulltype ITEM id FROM rack TO side rack'''
-    p[0] = '1' + p[2] + p[6] + p[9] + p[8] + p[4]
+    '''main : movelay fulltype ITEM id TO rack FROM rack'''
+    p[0] = '1' + p[2] + p[8] + p[6] + '0' + p[4]
 
 def p_moveitemfromto3(p):
-    '''main : movelay fulltype ITEM id TO rack side FROM rack'''
-    p[0] = '1' + p[2] + p[9] + p[6] + p[7] + p[4]
+    '''main : movelay ITEM fulltype id FROM rack TO rack'''
+    p[0] = '1' + p[3] + p[6] + p[8] + '0' + p[4]
 
 def p_moveitemfromto4(p):
-    '''main : movelay fulltype ITEM id TO side rack FROM rack'''
-    p[0] = '1' + p[2] + p[9] + p[7] + p[6] + p[4]
+    '''main : movelay ITEM fulltype id TO rack FROM rack'''
+    p[0] = '1' + p[3] + p[8] + p[6] + '0' + p[4]
 
 def p_moveitemfromto5(p):
-    '''main : movelay ITEM fulltype id FROM rack TO rack side'''
-    p[0] = '1' + p[3] + p[6] + p[8] + p[9] + p[4]
+    '''main : movelay ITEM id fulltype FROM rack TO rack'''
+    p[0] = '1' + p[4] + p[6] + p[8] + '0' + p[3]
 
 def p_moveitemfromto6(p):
-    '''main : movelay ITEM fulltype id FROM rack TO side rack'''
-    p[0] = '1' + p[3] + p[6] + p[9] + p[8] + p[4]
+    '''main : movelay ITEM id fulltype TO rack FROM rack'''
+    p[0] = '1' + p[4] + p[8] + p[6] + '0' + p[3]
 
 def p_moveitemfromto7(p):
-    '''main : movelay ITEM fulltype id TO rack side FROM rack'''
-    p[0] = '1' + p[3] + p[9] + p[6] + p[7] + p[4]
+    '''main : FROM rack movelay fulltype ITEM id TO rack'''
+    p[0] = '1' + p[4] + p[2] + p[8] + '0' + p[6]
 
 def p_moveitemfromto8(p):
-    '''main : movelay ITEM fulltype id TO side rack FROM rack'''
-    p[0] = '1' + p[3] + p[9] + p[7] + p[6] + p[4]
+    '''main : FROM rack movelay ITEM fulltype id TO rack'''
+    p[0] = '1' + p[5] + p[2] + p[8] + '0' + p[6]
 
 def p_moveitemfromto9(p):
-    '''main : movelay ITEM id fulltype FROM rack TO rack side'''
-    p[0] = '1' + p[4] + p[6] + p[8] + p[9] + p[3]
+    '''main : FROM rack movelay ITEM id fulltype TO rack'''
+    p[0] = '1' + p[6] + p[2] + p[8] + '0' + p[5]
 
 def p_moveitemfromto10(p):
-    '''main : movelay ITEM id fulltype FROM rack TO side rack'''
-    p[0] = '1' + p[4] + p[6] + p[9] + p[8] + p[3]
+    '''main : FROM rack TO rack movelay fulltype ITEM id'''
+    p[0] = '1' + p[6] + p[2] + p[4] + '0' + p[8]
 
 def p_moveitemfromto11(p):
-    '''main : movelay ITEM id fulltype TO rack side FROM rack'''
-    p[0] = '1' + p[4] + p[9] + p[6] + p[7] + p[3]
+    '''main : FROM rack TO rack movelay ITEM fulltype id'''
+    p[0] = '1' + p[7] + p[2] + p[4] + '0' + p[8]
 
 def p_moveitemfromto12(p):
-    '''main : movelay ITEM id fulltype TO side rack FROM rack'''
-    p[0] = '1' + p[4] + p[9] + p[7] + p[6] + p[3]
-
-def p_moveitemfromto14(p):
-    '''main : FROM rack movelay fulltype ITEM id TO rack side'''
-    p[0] = '1' + p[4] + p[2] + p[8] + p[9] + p[6]
-
-def p_moveitemfromto15(p):
-    '''main : FROM rack movelay fulltype ITEM id TO side rack'''
-    p[0] = '1' + p[4] + p[2] + p[9] + p[8] + p[6]
-
-def p_moveitemfromto16(p):
-    '''main : FROM rack movelay ITEM fulltype id TO rack side'''
-    p[0] = '1' + p[5] + p[2] + p[8] + p[9] + p[6]
-
-def p_moveitemfromto17(p):
-    '''main : FROM rack movelay ITEM fulltype id TO side rack'''
-    p[0] = '1' + p[5] + p[2] + p[9] + p[8] + p[6]
-
-def p_moveitemfromto18(p):
-    '''main : FROM rack movelay ITEM id fulltype TO rack side'''
-    p[0] = '1' + p[6] + p[2] + p[8] + p[9] + p[5]
-
-def p_moveitemfromto19(p):
-    '''main : FROM rack movelay ITEM id fulltype TO side rack'''
-    p[0] = '1' + p[6] + p[2] + p[9] + p[8] + p[5]
-
-def p_moveitemfromto20(p):
-    '''main : FROM rack TO rack side movelay fulltype ITEM id'''
-    p[0] = '1' + p[7] + p[2] + p[4] + p[5] + p[9]
-
-def p_moveitemfromto21(p):
-    '''main : FROM rack TO side rack movelay fulltype ITEM id'''
-    p[0] = '1' + p[7] + p[2] + p[5] + p[4] + p[9]
-
-def p_moveitemfromto23(p):
-    '''main : FROM rack TO rack side movelay ITEM fulltype id'''
-    p[0] = '1' + p[8] + p[2] + p[4] + p[5] + p[9]
-
-def p_moveitemfromto24(p):
-    '''main : FROM rack TO side rack movelay ITEM fulltype id'''
-    p[0] = '1' + p[8] + p[2] + p[5] + p[4] + p[9]
-
-def p_moveitemfromto25(p):
-    '''main : FROM rack TO rack side movelay ITEM id fulltype'''
-    p[0] = '1' + p[9] + p[2] + p[4] + p[5] + p[8]
-
-def p_moveitemfromto26(p):
-    '''main : FROM rack TO side rack movelay ITEM id fulltype'''
-    p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-#########################################
-# finish list indexes and possibilities #
-######################################### 
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO rack side fulltype ITEM id FROM rack'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO side rack fulltype ITEM id FROM rack'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO rack side ITEM fulltype id FROM rack'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO side rack ITEM fulltype id FROM rack'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO rack side ITEM id fulltype FROM rack'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO side rack ITEM id fultype FROM rack'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO rack side FROM rack fulltype ITEM id'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO side rack FROM rack fulltype ITEM id'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO rack side FROM rack ITEM fulltype id'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO side rack FROM rack ITEM fulltype id'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO rack side FROM rack ITEM id fulltype'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
-
-# def p_moveitemfromto27(p):
-#     '''main : movelay TO side rack FROM rack ITEM id fultype'''
-#     p[0] = '1' + p[9] + p[2] + p[5] + p[4] + p[8]
+    '''main : FROM rack TO rack movelay ITEM id fulltype'''
+    p[0] = '1' + p[8] + p[2] + p[4] + '0' + p[7]
 
 def p_moveitemto1(p):
-    '''main : movelay fulltype ITEM id TO rack side'''
-    p[0] = '2' + p[2] + '00' + p[6] + p[7] + p[4]
+    '''main : movelay fulltype ITEM id TO rack'''
+    p[0] = '2' + p[2] + '00' + p[6] + '0' + p[4]
 
 def p_moveitemto2(p):
-    '''main : movelay fulltype ITEM id TO side rack'''
-    p[0] = '2' + p[2] + '00' + p[7] + p[6] + p[4]
+    '''main : movelay ITEM fulltype id TO rack'''
+    p[0] = '2' + p[3] + '00' + p[6] + '0' + p[4]
 
 def p_moveitemto3(p):
-    '''main : movelay ITEM fulltype id TO rack side'''
-    p[0] = '2' + p[3] + '00' + p[6] + p[7] + p[4]
+    '''main : movelay ITEM id fulltype TO rack'''
+    p[0] = '2' + p[4] + '00' + p[6] + '0' + p[3]
 
 def p_moveitemto4(p):
-    '''main : movelay ITEM fulltype id TO side rack'''
-    p[0] = '2' + p[3] + '00' + p[7] + p[6] + p[4]
+    '''main : TO rack movelay fulltype ITEM id'''
+    p[0] = '2' + p[4] + '00' + p[2] + '0' + p[6]
 
 def p_moveitemto5(p):
-    '''main : movelay ITEM id fulltype TO rack side'''
-    p[0] = '2' + p[4] + '00' + p[6] + p[7] + p[3]
+    '''main : TO rack movelay ITEM fulltype id'''
+    p[0] = '2' + p[5] + '00' + p[2] + '0' + p[6]
 
 def p_moveitemto6(p):
-    '''main : movelay ITEM id fulltype TO side rack'''
-    p[0] = '2' + p[4] + '00' + p[7] + p[6] + p[3]
+    '''main : TO rack movelay ITEM id fulltype'''
+    p[0] = '2' + p[6] + '00' + p[2] + '0' + p[5]
 
-def p_moveitemto7(p):
-    '''main : TO rack side movelay fulltype ITEM id'''
-    p[0] = '2' + p[5] + '00' + p[2] + p[3] + p[7]
-
-def p_moveitemto8(p):
-    '''main : TO side rack movelay fulltype ITEM id'''
-    p[0] = '2' + p[5] + '00' + p[3] + p[2] + p[7]
-
-def p_moveitemto9(p):
-    '''main : TO rack side movelay ITEM fulltype id'''
-    p[0] = '2' + p[6] + '00' + p[2] + p[3] + p[7]
-
-def p_moveitemto10(p):
-    '''main : TO side rack movelay ITEM fulltype id'''
-    p[0] = '2' + p[6] + '00' + p[3] + p[2] + p[7]
-
-def p_moveitemto11(p):
-    '''main : TO rack side movelay ITEM id fulltype'''
-    p[0] = '2' + p[7] + '00' + p[2] + p[3] + p[6]
-
-def p_moveitemto12(p):
-    '''main : TO side rack movelay ITEM id fulltype'''
-    p[0] = '2' + p[7] + '00' + p[3] + p[2] + p[6]
-
-# def p_go1(p):
-#     '''main : GO TO rack side'''
-#     p[0] = '3' + '000' + '00' + p[3] + p[4] + '000'
-
-# def p_go2(p):
-#     '''main : GO TO side rack'''
-#     p[0] = '3' + '000' + '00' + p[4] + p[3] + '000'
-
-# def p_go3(p):
-#     '''main : GO TO ITEM fulltype id'''
-#     p[0] = '4' + p[4] + '00' + '00' + '0' + p[5]
-
-# def p_go4(p):
-#     '''main : GO TO ITEM id fulltype'''
-#     p[0] = '4' + p[5] + '00' + '00' + '0' + p[4]
-
-# def p_go5(p):
-#     '''main : GO TO fulltype ITEM id'''
-#     p[0] = '4' + p[3] + '00' + '00' + '0' + p[5]
-
-# def p_find1(p):
-#     '''main : FIND rack side'''
-#     p[0] = '3' + '000' + '00' + p[2] + p[3] + '000'
-
-# def p_find2(p):
-#     '''main : FIND side rack'''
-#     p[0] = '3' + '000' + '00' + p[3] + p[2] + '000'
-
-def p_find3(p):
+def p_find1(p):
     '''main : FIND ITEM fulltype id'''
     p[0] = '4' + p[3] + '00' + '00' + '0' + p[4]
 
-def p_find4(p):
+def p_find2(p):
     '''main : FIND ITEM id fulltype'''
     p[0] = '4' + p[4] + '00' + '00' + '0' + p[3]
 
-def p_find5 (p):
+def p_find3 (p):
     '''main : FIND fulltype ITEM id'''
     p[0] = '4' + p[2] + '00' + '00' + '0' + p[4]
 
@@ -284,24 +134,6 @@ def p_pick9(p):
 def p_pick10(p):
     '''main : PICK ITEM id fulltype'''
     p[0] = '5' + p[4] + '00' + '00' + '0' + p[3]
-
-# def p_lay1(p):
-#     '''main : LAY ITEM TO rack side'''
-#     p[0] = '6' + '000' + '00' + p[4] + p[5] + '000'
-
-# def p_lay2(p):
-#     '''main : LAY ITEM TO side rack'''
-#     p[0] = '6' + '000' + '00' + p[5] + p[4] + '000'
-
-# def p_lay3(p):
-#     '''main : ITEM LAY TO rack side'''
-#     p[0] = '6' + '000' + '00' + p[4] + p[5] + '000'
-
-# def p_lay4(p):
-#     '''main : ITEM LAY TO side rack'''
-#     p[0] = '6' + '000' + '00' + p[5] + p[4] + '000'
-
-# def p_sort(p):
 
 def p_fulltype1(p):
     '''fulltype : color material category'''
@@ -372,37 +204,50 @@ def p_shelf(p):
     else:
         p[0] = str(p[1]) + 's'
 
-def p_lvl(p):
-    '''lvl : LVL num
-           | num LVL
-           | empty'''
-    if len(p) == 3:
-        if type(p[1]) is str:
-            p[0] = str(p[2])
-        elif type(p[2]) is str:
-            p[0] = str(p[1])
-    elif len(p) == 2:
-        p[0] = p[1]
+def p_lvl1(p):
+    '''lvl : LVL num'''
+    p[0] = str(p[2])
 
-def p_side(p):
-    '''side : TO SIDE
-            | SIDE
-            | empty'''
-    if len(p) == 2:
-        if p[1] != '0':
-            for i in sidedict:
-                if i in p[1]:
-                    p[0] = str(sidedict[i])
-        else:
-            p[0] = p[1]
-    elif len(p) == 3:
-        for i in sidedict:
-            if i in p[2]:
-                p[0] = str(sidedict[i])
+def p_lvl2(p):    
+    '''lvl : num LVL'''
+    p[0] = str(p[1])
 
-def p_num(p):
-    '''num : NUM
-           | empty'''
+def p_lvl3(p):
+    '''lvl : TO LVL num'''
+    p[0] = str(p[3])
+
+def p_lvl4(p):
+    '''lvl : TO num LVL'''
+    p[0] = str(p[2])
+
+def p_lvl5(p):
+    '''lvl : empty'''
+    p[0] = p[1]
+
+def p_num1(p):
+    '''num : SIDE'''
+    for i in sidedict:
+        if i in p[1]:
+            p[0] = sidedict[i]
+
+def p_num2(p):
+    '''num : NUM'''
+    p[0] = p[1]
+
+def p_num3(p):
+    '''num : NUMWORD1'''
+    for i in numberdict1:
+        if i in p[1]:
+            p[0] = numberdict1[i]
+
+def p_num4(p):
+    '''num : NUMWORD2'''
+    for i in numberdict2:
+        if i in p[1]:
+            p[0] = numberdict2[i]
+
+def p_num5(p):
+    '''num : empty'''
     p[0] = p[1]
 
 def p_id(p):
