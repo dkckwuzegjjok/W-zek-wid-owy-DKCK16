@@ -229,6 +229,10 @@ def p_lvl4(p):
     p[0] = str(p[2])
 
 def p_lvl5(p):
+    '''lvl : LVL TO num'''
+    p[0] = str(p[3])
+
+def p_lvl6(p):
     '''lvl : empty'''
     p[0] = p[1]
 

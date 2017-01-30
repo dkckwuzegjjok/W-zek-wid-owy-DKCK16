@@ -8,7 +8,7 @@ import forkliftparser
 #     transtab = str.maketrans(intab, outtab)
 #     return word.translate(transtab)
 
-cmd = trans(sys.argv[1].lower())
+cmd = sys.argv[1].lower()
 
 forkliftlexer.flexer.input(cmd)
 
