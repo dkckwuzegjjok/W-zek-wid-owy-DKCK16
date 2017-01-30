@@ -41,7 +41,7 @@ def t_NUM(t):
     return t
 
 def t_error(t):
-    print('Nie wiem co masz na myśli od momentu: "%s".' % (t.value))
+    print('Nie wiem co masz na mysli od momentu: "%s".' % (t.value))
     t.lexer.skip(len(t.value))
 
 flexer = lex.lex()
