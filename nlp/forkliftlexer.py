@@ -22,8 +22,8 @@ t_COLOR = (r'czerwon(ego|ych|ym|ej|y|a|e)|niebiesk(i|a|ie(j)?|ich|im(i)?|iego)|'
            r'zolt(y|a|e|ym|ej|ego|ych)|zielon(y|a|e|ym|ej|ego|ych)|'
            r'czarn(y|a|e|ym|ej|ego|ych)|bial(y|a|e|ym|ej|ego|ych)')
 t_NUMWORD1 = (r'jeden|dwa|trzy|cztery|piec|szesc')
-t_NUMWORD2 = (r'pierwsz(a|y|egp)|drug(a|i(ego)?)|trzeci(a|ego)?|czwart(a|y|ego)|'
-              r'piat(a|y|ego)|szost(a|y|ego)')
+t_NUMWORD2 = (r'pierwsz(a|y(m)?|ej|ego)|drug(a|i(m|ej|ego)?)|trzeci(a|m|ej|ego)?|'
+              r'czwart(a|y(m)?|ej|ego)|piat(a|y(m)?|ej|ego)|szost(a|y(m)?|ej|ego)')
 
 def t_zignoruj(t):
     (r'\bjej\b|\bo\b|\bi\b|\bma\b|\bnr\b|\bnumer(u|ze)?\b|\bstron(a|e|ie)\b|\bid\b|\bto\b|'

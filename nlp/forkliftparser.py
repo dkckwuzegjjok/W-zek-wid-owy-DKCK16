@@ -188,21 +188,29 @@ def p_movelay(p):
                | LAY'''
     p[0] = p[1]
 
-def p_rack(p):
-    '''rack : shelf lvl
-            | lvl shelf'''
-    if 's' in p[1]:
-       p[0] = p[1].replace('s', '') + p[2]
-    else:
-        p[0] = p[2].replace('s', '') + p[1]
+def p_rack1(p):
+    '''rack : shelf lvl'''
+    p[0] = p[1] + p[2]
 
-def p_shelf(p):
-    '''shelf : SHELF num
-             | num SHELF'''
-    if type(p[1]) is str:
-        p[0] = str(p[2]) + 's'
-    else:
-        p[0] = str(p[1]) + 's'
+def p_rack2(p):
+    '''rack : lvl shelf'''
+    p[0] = p[2] + p[1]
+
+def p_shelf1(p):
+    '''shelf : SHELF num'''
+    p[0] = str(p[2])
+
+def p_shelf2(p):
+    '''shelf : num SHELF'''
+    p[0] = str(p[1])
+
+def p_shelf3(p):
+    '''shelf : TO SHELF num'''
+    p[0] = str(p[3])
+
+def p_shelf4(p):
+    '''shelf : TO num SHELF'''
+    p[0] = str(p[2])
 
 def p_lvl1(p):
     '''lvl : LVL num'''
