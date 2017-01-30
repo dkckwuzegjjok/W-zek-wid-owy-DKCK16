@@ -4,7 +4,9 @@
 int Package::nextID = 100;
 
 Package::Package(int height, int width, P_COLOR color, P_MATERIAL material)
-	: ID(nextID++), height(height), width(width), color(color), material(material), state(P_STATE::FREE), shelf(NULL), shelfPositionX(0)
+	: ID(nextID++), height(height), width(width), 
+	color(color), material(material), 
+	state(P_STATE::FREE), shelf(NULL), shelfPositionX(0)
 {
 
 }
@@ -110,4 +112,40 @@ void Package::setSprite(int shelfID)
 void Package::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(sprite);
+	if (sprite.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(*window))))
+	{
+		sf::RectangleShape rect;
+		rect.setFillColor(sf::Color(200, 200, 200));
+		rect.setOutlineColor(sf::Color::Black);
+		rect.setOutlineThickness(3);
+		rect.setSize(sf::Vector2f(250, 90));
+		rect.setPosition(10, 10);
+
+		sf::Font font;
+		font.loadFromFile("arial.ttf");
+
+		int rackID = info / 100;
+		int shelfID = (info % 100) / 10;
+		int packageNo = info % 10;
+		std::string string = std::string("Paczka numer ") + std::to_string(ID) 
+							+ std::string("\nRegal: ") + std::to_string(rackID) 
+							+ std::string("\nPoziom: ") + std::to_string(shelfID) 
+							+ std::string("\nJest to ") + std::to_string(packageNo) + std::string(". paczka na tej polce.");
+
+		sf::Text text;
+		text.setFillColor(sf::Color::Black);
+		text.setFont(font);
+		text.setCharacterSize(15);
+		text.setPosition(rect.getPosition().x + 10, rect.getPosition().y + 10);
+		text.setString(sf::String(string));
+
+		target.draw(rect);
+		target.draw(text);
+	}
+}
+
+void Package::feedInfo(int newInfo, sf::RenderWindow& newWindow)
+{
+	info = newInfo;
+	window = &newWindow;
 }

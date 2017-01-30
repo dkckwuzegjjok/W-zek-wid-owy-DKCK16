@@ -3,6 +3,7 @@
 #include <tchar.h>
 #include <string>
 #include <math.h>
+#include <fstream>
 #include "resource.h"
 #include "warehouseview.h"
 #include "warehouse.h"
@@ -21,7 +22,7 @@ WarehouseView* warehouseView;
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 INT_PTR CALLBACK AboutDlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
 void AppendText(const HWND &hwnd, TCHAR* newText);
-TCHAR* ProcessCommand(TCHAR* command);
+void ProcessCommand(TCHAR* command);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
@@ -127,6 +128,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 					warehouseView->highlightRack(i, false);
 				}
 			}
+
+			warehouseView->update(sfmlView);
+			AppendText(hCmdLog, warehouseView->getAnswer());
+
 			//SFML RENDERING CODE
 			sfmlView.clear(sf::Color(237, 209, 140));
 
@@ -205,7 +210,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				AppendText(hCmdLog, ">> ");
 				AppendText(hCmdLog, buf);
 				AppendText(hCmdLog, "\n");
-				AppendText(hCmdLog, ProcessCommand(buf));
+				ProcessCommand(buf);
 				SetWindowText(hCmdLine, "");
 
 				SetFocus(hCmdLine);
@@ -290,20 +295,24 @@ void AppendText(const HWND &hwnd, TCHAR* newText)
 	return;
 }
 
-TCHAR* ProcessCommand(TCHAR* command)
+void ProcessCommand(TCHAR* command)
 {
-	std::string cmd = command;
-	if (std::stoi(cmd) >= 100 && std::stoi(cmd) < 1000)
-	{
-		warehouseView->flTakePackage(std::stoi(cmd));
-		std::string temp = "";
-		temp += "Zdjeto paczke nr " + cmd + "\n";
-		TCHAR* answer = new TCHAR[temp.size() + 1];
-		answer[temp.size()] = 0;
-		std::copy(temp.begin(), temp.end(), answer);
-		return answer;
-	}
-	return "Nie rozpoznano polecenia.\n";
-}
+	long long CmdID = 0;
 
+	std::string arg = command;
+	arg = "\"" + arg + "\"";
+	std::string syscommand = ".\\nlp\\nlp.py " + arg;
+	system(syscommand.c_str());
+	std::fstream file;
+	file.open("out.txt", std::ios::in);
+	if (file.good())
+	{
+		std::string CmdID_str = "";
+		file >> CmdID_str;
+		if (CmdID_str.length() > 0)
+			CmdID = std::stoll(CmdID_str);
+	}
+
+	warehouseView->processCommand(CmdID);
+}
 

@@ -15,13 +15,11 @@ Warehouse::Warehouse()
 		for (int j = 0; j < SHELFQNTY; j++)
 		{
 			Package* package = new Package(rand() % 60 + 41, rand() % 40 + 61, P_COLOR(rand() % 6), P_MATERIAL(rand() % 2));
-			racks[i]->getShelf(j).addPackage(*package, rand() % 50);
+			racks[i]->getShelf(j).addPackage(*package, rand() % 100);
 			package = new Package(rand() % 60 + 41, rand() % 40 + 61, P_COLOR(rand() % 6), P_MATERIAL(rand() % 2));
-			racks[i]->getShelf(j).addPackage(*package, rand() % 50 + 150);
+			racks[i]->getShelf(j).addPackage(*package, rand() % 100 + 200);
 			package = new Package(rand() % 60 + 41, rand() % 40 + 61, P_COLOR(rand() % 6), P_MATERIAL(rand() % 2));
-			racks[i]->getShelf(j).addPackage(*package, rand() % 50 + 300);
-			package = new Package(rand() % 60 + 41, rand() % 40 + 61, P_COLOR(rand() % 6), P_MATERIAL(rand() % 2));
-			racks[i]->getShelf(j).addPackage(*package, rand() % 50 + 450);
+			racks[i]->getShelf(j).addPackage(*package, rand() % 100 + 400);
 		}
 	}
 }

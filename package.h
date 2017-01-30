@@ -1,6 +1,7 @@
 #pragma once
 #include <stdlib.h>
 #include <SFML/Graphics.hpp>
+#include <string>
 
 class Shelf;
 
@@ -19,6 +20,7 @@ private:
 	static int nextID;
 
 	int ID;
+	int info;
 
 	int height;
 	int width;
@@ -31,6 +33,7 @@ private:
 	int shelfPositionX;
 
 	sf::RectangleShape sprite;
+	sf::RenderWindow* window;
 
 public:
 	Package(int height, int width, P_COLOR color, P_MATERIAL material);
@@ -51,4 +54,5 @@ public:
 	void setSprite(int shelfID);
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+	void feedInfo(int newInfo, sf::RenderWindow& newWindow);
 };

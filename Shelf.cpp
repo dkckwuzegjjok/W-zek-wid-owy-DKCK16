@@ -7,6 +7,11 @@ Shelf::Shelf(int shelfID, int width, Rack* pRack)
 	height = SHELFHEIGHT;
 }
 
+int Shelf::getID()
+{
+	return ID;
+}
+
 Rack& Shelf::getRack()
 {
 	return *rack;
@@ -22,7 +27,7 @@ Package& Shelf::getPackage(int index)
 	return *packages[index];
 }
 
-bool Shelf::addPackage(Package& newPackage)
+int Shelf::addPackage(Package& newPackage)
 {
 	int x = 0;
 
@@ -34,7 +39,7 @@ bool Shelf::addPackage(Package& newPackage)
 			newPackage.setShelfPositionX(x);
 			newPackage.setSprite(ID);
 			packages.insert(packages.begin() + i, &newPackage);
-			return true;
+			return x;
 		}
 		else
 		{
@@ -48,10 +53,10 @@ bool Shelf::addPackage(Package& newPackage)
 		newPackage.setShelfPositionX(x);
 		newPackage.setSprite(ID);
 		packages.push_back(&newPackage);
-		return true;
+		return x;
 	}
 
-	return false;
+	return -1;
 }
 
 bool Shelf::addPackage(Package& newPackage, int positionX)

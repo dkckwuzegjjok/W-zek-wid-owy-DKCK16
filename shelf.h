@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "package.h"
+
 class Rack;
 
 #define SHELFHEIGHT 100
@@ -19,11 +20,12 @@ private:
 public:
 	Shelf(int shelfID, int width, Rack* pRack = NULL);
 
+	int getID();
 	Rack& getRack();
 	int getPackageQnty();
 	Package& getPackage(int index);
 
-	bool addPackage(Package& newPackage);
+	int addPackage(Package& newPackage);
 	bool addPackage(Package& newPackage, int positionX);
 	bool removePackage(int packageID);
 

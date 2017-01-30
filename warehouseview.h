@@ -1,7 +1,24 @@
 #pragma once
+#include <tchar.h>
+#include <vector>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "warehouse.h"
 #include "forklift.h"
+
+struct Command
+{
+	int order;
+	P_COLOR color;
+	P_MATERIAL material;
+	int category;
+	int fromRackID;
+	int fromShelfID;
+	int toRackID;
+	int toShelfID;
+	int side;
+	int packageID;
+};
 
 class WarehouseView : public sf::Drawable
 {
@@ -24,14 +41,26 @@ private:
 	Warehouse* warehouse;
 	Forklift* forklift;
 
+	std::vector<Command*>commandQueue;
+	std::string answerText;
+	void setAnswer(std::string answer);
+
+	int flTakePackage(int packageID);
+	bool flPutPackage(int rackID, int shelfID);
+
 public:
 	bool rackHighlight[RACKQNTY];
 
 	WarehouseView();
 	~WarehouseView();
 
+	void update(sf::RenderWindow& window);
+	TCHAR* getAnswer();
+
 	void forkliftUpdate(sf::Time time);
-	void flTakePackage(int packageID);
+	void processCommand(long long CmdID);
+	Package* getFlPackage();
+	Package* getPackage(int packageID);
 
 	int getRackView();
 	void setRackView(int i);
