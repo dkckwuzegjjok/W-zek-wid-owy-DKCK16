@@ -1,13 +1,13 @@
 import ply.yacc as yacc
 import forkliftlexer
 
+sidedict = {'gor' : 1, 'srod' : 2, 'dol' : 3}
+numberdict1 = {'jeden' : 1, 'dwa' : 2, 'trzy' : 3, 'cztery' : 4, 'piec' : 5, 'szesc' : 6}
+numberdict2 = {'pierwsz' : 1, 'drug' : 2, 'trzeci' : 3, 'czwart' : 4, 'piat' : 5, 'szost' : 6}
 colorsdict = {'czerwon' : 1, 'niebiesk' : 2, 'zolt' : 3, 'zielon' : 4,
               'czarn' : 5, 'bial' : 6}
 materialdict = {'drewn' : 1, 'metal' : 2}
-sidedict = {'gor' : 1, 'srod' : 2, 'dol' : 3}
 categorydict = {'zywnosc' : 1}
-numberdict1 = {'jeden' : 1, 'dwa' : 2, 'trzy' : 3, 'cztery' : 4, 'piec' : 5, 'szesc' : 6}
-numberdict2 = {'pierwsz' : 1, 'drug' : 2, 'trzeci' : 3, 'czwart' : 4, 'piat' : 5, 'szost' : 6}
 
 tokens = forkliftlexer.tokens
 
@@ -59,8 +59,32 @@ def p_moveitemfromto12(p):
     '''main : FROM rack TO rack movelay ITEM id fulltype'''
     p[0] = '1' + p[8] + p[2] + p[4] + '0' + p[7]
 
+def p_moveitemfromto13(p):
+    '''main : TO rack movelay fulltype ITEM id FROM rack'''
+    p[0] = '1' + p[4] + p[8] + p[2] + '0' + p[6]
+
+def p_moveitemfromto14(p):
+    '''main : TO rack movelay ITEM fulltype id FROM rack'''
+    p[0] = '1' + p[5] + p[8] + p[2] + '0' + p[6]
+
+def p_moveitemfromto15(p):
+    '''main : TO rack movelay ITEM id fulltype FROM rack'''
+    p[0] = '1' + p[6] + p[8] + p[2] + '0' + p[5]
+
+def p_moveitemfromto16(p):
+    '''main : TO rack FROM rack movelay fulltype ITEM id'''
+    p[0] = '1' + p[6] + p[4] + p[2] + '0' + p[8]
+
+def p_moveitemfromto17(p):
+    '''main : TO rack FROM rack movelay ITEM fulltype id'''
+    p[0] = '1' + p[7] + p[4] + p[2] + '0' + p[8]
+
+def p_moveitemfromto18(p):
+    '''main : TO rack FROM rack movelay ITEM id fulltype'''
+    p[0] = '1' + p[8] + p[4] + p[2] + '0' + p[7]
+
 def p_moveitemto1(p):
-    '''main : movelay fulltype ITEM id TO rack'''
+    '''main : movelay fulltype ITEM id FROM rack'''
     p[0] = '2' + p[2] + '00' + p[6] + '0' + p[4]
 
 def p_moveitemto2(p):
@@ -82,6 +106,66 @@ def p_moveitemto5(p):
 def p_moveitemto6(p):
     '''main : TO rack movelay ITEM id fulltype'''
     p[0] = '2' + p[6] + '00' + p[2] + '0' + p[5]
+
+def p_picklay1(p):
+    '''main : PICK fulltype ITEM id FROM rack movelay TO rack'''
+    p[0] = '1' + p[2] + p[6] + p[9] + '0' + p[4]
+
+def p_picklay2(p):
+    '''main : movelay fulltype ITEM id TO rack PICK FROM rack'''
+    p[0] = '1' + p[2] + p[9] + p[6] + '0' + p[4]
+
+def p_picklay3(p):
+    '''main : PICK ITEM fulltype id FROM rack movelay TO rack'''
+    p[0] = '1' + p[3] + p[6] + p[9] + '0' + p[4]
+
+def p_picklay4(p):
+    '''main : movelay ITEM fulltype id TO rack PICK FROM rack'''
+    p[0] = '1' + p[3] + p[9] + p[6] + '0' + p[4]
+
+def p_picklay5(p):
+    '''main : PICK ITEM id fulltype FROM rack movelay TO rack'''
+    p[0] = '1' + p[4] + p[6] + p[9] + '0' + p[3]
+
+def p_picklay6(p):
+    '''main : movelay ITEM id fulltype TO rack PICK FROM rack'''
+    p[0] = '1' + p[4] + p[9] + p[6] + '0' + p[3]
+
+def p_picklay7(p):
+    '''main : FROM rack PICK fulltype ITEM id movelay TO rack'''
+    p[0] = '1' + p[4] + p[2] + p[9] + '0' + p[6]
+
+def p_picklay8(p):
+    '''main : FROM rack PICK ITEM fulltype id movelay TO rack'''
+    p[0] = '1' + p[5] + p[2] + p[9] + '0' + p[6]
+
+def p_picklay9(p):
+    '''main : FROM rack PICK ITEM id fulltype movelay TO rack'''
+    p[0] = '1' + p[6] + p[2] + p[9] + '0' + p[5]
+
+def p_picklay10(p):
+    '''main : FROM rack PICK movelay TO rack fulltype ITEM id'''
+    p[0] = '1' + p[7] + p[2] + p[6] + '0' + p[9]
+
+def p_picklay11(p):
+    '''main : FROM rack PICK movelay TO rack ITEM fulltype id'''
+    p[0] = '1' + p[8] + p[2] + p[6] + '0' + p[9]
+
+def p_picklay12(p):
+    '''main : FROM rack PICK movelay TO rack ITEM id fulltype'''
+    p[0] = '1' + p[9] + p[2] + p[6] + '0' + p[8]
+
+def p_picklay13(p):
+    '''main : PICK FROM rack movelay TO rack fulltype ITEM id'''
+    p[0] = '1' + p[7] + p[3] + p[6] + '0' + p[9]
+
+def p_picklay14(p):
+    '''main : PICK FROM rack movelay TO rack ITEM fulltype id'''
+    p[0] = '1' + p[8] + p[3] + p[6] + '0' + p[9]
+
+def p_picklay15(p):
+    '''main : PICK FROM rack movelay TO rack ITEM id fulltype'''
+    p[0] = '1' + p[9] + p[3] + p[6] + '0' + p[8]
 
 def p_find1(p):
     '''main : FIND ITEM fulltype id'''
